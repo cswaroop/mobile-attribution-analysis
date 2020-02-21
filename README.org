@@ -1,0 +1,56 @@
+https://www.youtube.com/watch?v=VBIlk3GMmNc&list=PL_arKaS8JOXHgSDJXtAVxhtDBJ6WL3uaS&index=16
+* Lessons in Building a System that Processes More than 70 Billion Events Daily - Morri Feldman
+AppsFlyer’s mobile attribution and analysis platform is used by the biggest and most popular applications on Earth, generating a constant “storm” of 70B+ events (HTTP Requests) on their microservices, cloud based platform daily. In this talk, Morri will share their technological choices which include Clojure as their leading backend language - and the decisions to migrate from Python for improved multi-threading and concurrency.
+
+The backend was to built to be a robust system based on a diversity of open source tooling such as: Kafka, RabbitMQ, Aerospike, Redis and a host of proprietary in-house developed tools and services that enable the testing and adoption of new data technologies, continuous deployment, and large-scale monitoring of the system - including open sourcing production libraries for interoperability with core technologies.
+
+This talk will also dive into AppFlyer's real-time back-end architecture & functional programming philosophy, what it is like to be a developer at AppsFlyer, and overall attitude towards performance, redundancy and resiliency for processing 35 Million events/minute at an average latency of hundreds of milliseconds per event.
+
+** Mobile/Web hybrid Attribution and analysis
+** Tech Stack
+   2 -person team
+
+   - Python
+   - Redis
+   - MongoDb (
+   - CouchDB (master database)
+
+  over time
+
+  - Clojure (primary language)  principles of language permeated to architecture; Language of the system Rich
+  - Kafka
+  - Docker, Consul, Spark
+  - Google BigQuery
+  - Aerospike
+  - Druid
+  - Go
+  - ClickHouse
+** prefernce for clustered masterless technologies
+   - Kafa, aerospike, clickhouse
+** System Architecture; 
+   Mainly a data platform with few microservices (attribution, user, postbacks, push) than a SOA
+   Mobile phones hitting web servers. webservers puts into kafka
+   - Microservices  pulls from kafka
+     - Attribution Engine + Aerospike
+     - User Activity + Aerospike
+     - Postbacks to Partners
+     - Push API to Clients
+     - Batch Analytics + Druid + ClickHouse
+   - Also S3 for retention beyond kafka
+** Architecture Patterns
+   - Event Driven Architecture and also a mini-CQRS (both have Kafka as central DB)
+   - JSON/Protobuf on wire. Parquet for S3. Parquet is column oriented. so gives rigidity
+   - No rename of data fields is the
+   - downstream people pains (data teams) cannot be heard (app team)
+   - DB is an implementation detail
+** AWS
+   - spot instances
+   - Kafka - 280 nodes, 15 clusters
+   - Aerospike - 220 nodes, 17 clusters
+   - Apache Spark - 2600 nodes, 18 clusters
+   - Amazon S3 - 12 PB
+** Books
+   - Release It! - Michael T Nygard
+   - 
+
+
